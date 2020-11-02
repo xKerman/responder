@@ -254,7 +254,10 @@ def content_setter(mimetype):
 
     def setter(instance, value):
         instance.content = value
-        instance.mimetype = mimetype
+        if instance.encoding and mimetype.startswith("text/"):
+            instance.mimetype = f"{mimetype}; charset={instance.encoding}"
+        else:
+            instance.mimetype = mimetype
 
     return property(fget=getter, fset=setter)
 

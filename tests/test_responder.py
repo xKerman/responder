@@ -915,11 +915,11 @@ def test_response_html_property(api):
         resp.html = "<h1>Hello !</h1>"
 
         assert resp.content == "<h1>Hello !</h1>"
-        assert resp.mimetype == "text/html"
+        assert resp.mimetype == "text/html; charset=utf-8"
 
     r = api.requests.get(api.url_for(view))
     assert r.content == b"<h1>Hello !</h1>"
-    assert r.headers["Content-Type"] == "text/html"
+    assert r.headers["Content-Type"] == "text/html; charset=utf-8"
 
 
 def test_response_text_property(api):
@@ -928,11 +928,11 @@ def test_response_text_property(api):
         resp.text = "<h1>Hello !</h1>"
 
         assert resp.content == "<h1>Hello !</h1>"
-        assert resp.mimetype == "text/plain"
+        assert resp.mimetype == "text/plain; charset=utf-8"
 
     r = api.requests.get(api.url_for(view))
     assert r.content == b"<h1>Hello !</h1>"
-    assert r.headers["Content-Type"] == "text/plain"
+    assert r.headers["Content-Type"] == "text/plain; charset=utf-8"
 
 
 def test_stream(api, session):
